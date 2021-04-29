@@ -6,15 +6,8 @@ using namespace std;
 
 class Barco {
     private:
-        int pos[4];
+        bool pos[4] = {0,0,0,0};
         string tipo;
 
-    public: 
-        Barco(){};
-        Barco(string tipo);
 };
-
-Barco::Barco(string nombre){
-    tipo = nombre;
-}
 
