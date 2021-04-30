@@ -3,15 +3,15 @@
 #define MAX 10
 
 using namespace std;
-typedef long int tipolista;
+typedef long int Pila*;
 class Pila{
       private:
-              tipolista v[MAX];
+              Pila* v[MAX];
               int p;
       public:
              Pila();
-             void apilar(tipolista x);
-             tipolista tope(void);
+             void apilar(Pila* x);
+             Pila* tope(void);
              void desapilar(void);
              bool pilavacia();
 };
@@ -19,11 +19,11 @@ class Pila{
 Pila::Pila()
 {p=-1;
 }
-void Pila::apilar(tipolista x)
+void Pila::apilar(Pila* x)
 {  if(p<MAX-1)v[++p]=x;
    else cout<<"ERROR pila llena"<<endl;
 }
-tipolista Pila::tope()
+Pila* Pila::tope()
 {  if(!pilavacia()) return v[p];
    cout<<"La pila esta vacia";
    return "";

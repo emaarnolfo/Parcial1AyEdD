@@ -3,6 +3,7 @@
 #include <sstream>
 #include "Listas02.h"
 #include "Barco.h"
+#include "Cola.h"
 
 static int filasTablero = 10;
 static int colTablero = 10;
@@ -14,19 +15,24 @@ void disparo(Pila* p){}
 
 int main()
 {
-    int tablero[10][10];
+    bool tablero[10][10];
     int fila, columna;
     Barco barcos[10];
-    Cola* posiciones = new Cola(); 
+    Cola posiciones[100]; 
     Pila* sigDisparo = new Pila();
 
+    
     for(int i=0; i<filasTablero; i++){
         for(int j=0; i<colTablero; j++){
-            posiciones->add(i,j);
+            Pila* nuevo = new Pila();
+            nuevo->apilar(i, j); 
+            posiciones->encolar(nuevo);
         }
     }
+    
 
-    //cout << posiciones->imprimir("fin");
+    posiciones->imprimir();
+
     while(barcosHundidos < 10)
     {
     sigDisparo->apilar(fila, columna);             
