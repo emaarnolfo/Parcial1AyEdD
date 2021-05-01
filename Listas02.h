@@ -150,7 +150,7 @@ void Lista::impre(void)
     Nodo* aux;
     aux = czo;
     while (aux->get_next() != NULL) {
-        cout << aux->get_fila() << endl <<aux->get_col();
+        cout << aux->get_fila() << "-" <<aux->get_col() <<endl;
         aux = aux->get_next();
     }
 }
@@ -188,6 +188,7 @@ public:
     Nodo* tope(void) { return this->cabeza(); };
     void desapilar(void) { this->borrar(); };
     bool pilavacia() { return this->esvacia(); };
+    void impre(){this->impre();}
 };
 
 class Cola :public Lista {
