@@ -154,6 +154,7 @@ void Lista::impre(void)
         cout <<"Fila: " << aux->get_fila() << " Columna:" <<aux->get_col() <<endl;
         aux = aux->get_next();
     }
+
 }
 
 bool Lista::esta(int a, int b)
