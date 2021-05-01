@@ -4,7 +4,7 @@
 #include <sstream>
 #include "Listas02.h"
 
-#define MAX 100
+#define MAX 101
 
 using namespace std;
 
@@ -21,7 +21,7 @@ class ColaDePilas {
         void encolar(Pila* a);
         void desencolar();
         Pila* ultimo();
-        string imprimir();
+        void imprimir();
     };
 
 
@@ -31,6 +31,7 @@ void ColaDePilas::encolar(Pila* a){
         //if (ult == MAX - 2) ult = MAX - 1;
         ult = (ult + 1) % MAX;
         Q[ult] = a;
+        cout<<"Encole correctamente" <<endl;
     }
     else cout << "Cola llena" << endl;
 }
@@ -44,11 +45,13 @@ Pila* ColaDePilas::ultimo(void){
     return Q[ult];
 }
 
-string ColaDePilas::imprimir(){
+void ColaDePilas::imprimir(){
     if (!colavacia()) {
-       for (int i = frente; i != (ult + 1) % MAX; i = (i + 1) % MAX)
-            Q[i]->impre();
+       for (int i=0; i<MAX; i++){
+            //cout<<"Llamo a impre de pila" <<endl;
+            Q[i]->imprimir();
+       }
+    }else{
+        cout<<"La cola esta vacia" <<endl;
     }
-
-    return " <<< Cola vacia";
 }

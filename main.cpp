@@ -21,21 +21,26 @@ int main(int argc, char *arg[])
     Barco barcos[10];
     ColaDePilas* posiciones = new ColaDePilas(); 
     //Pila* sigDisparo = new Pila();
-
-    /*
+    //Pila* p1 = new Pila();
+    //p1->add(2, 3);
+//
+    //posiciones->encolar(p1);
+    
     for(int i=0; i<10; i++){
-        for(int j=0; i<10; j++){
+        for(int j=0; j<10; j++){
+            cout <<"Iteracion: " <<i <<"-" <<j <<endl;
             Pila* nuevo = new Pila();
-            //nuevo->apilar(i, j); 
+            nuevo->apilar(i, j); 
             posiciones->encolar(nuevo);
         }
     }
-    */
-
-    //cout<<"Cargue los datos correctamente" <<endl;
+    
     
 
-    //posiciones->imprimir();
+    cout<<"Cargue los datos correctamente" <<endl;
+    
+    cout<<"-----------------IMPRIMO LAS POSICIONES---------" <<endl;
+    posiciones->imprimir();
 
     cout << "Llegue al final";
    
