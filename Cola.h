@@ -11,14 +11,9 @@ class Cola{
       private:
               Pila* v[MaxCola];
               int ult;
-<<<<<<< HEAD
-      public:
-      Cola(void){ult = 0;}
-=======
               int frente;
       public:
       Cola(void){ult = -1; frente=-1;}
->>>>>>> emanuel
       Pila* tope();
       bool colavacia();
       void encolar(Pila* a) ;
@@ -31,19 +26,11 @@ Pila* Cola::tope(){
                     cout<<endl<<"TOPE: ERROR cola vacia"<<endl;
                     return NULL;
     }
-<<<<<<< HEAD
-    else return v[0];
-}
-
-bool Cola::colavacia(){
-     return ult == 1;
-=======
     else return v[frente];
 }
 
 bool Cola::colavacia(){
      return ult == -1;
->>>>>>> emanuel
 }
 
 void Cola::encolar(Pila* a){

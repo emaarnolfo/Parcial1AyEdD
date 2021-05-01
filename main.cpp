@@ -1,14 +1,8 @@
 #include <cstdlib>
 #include <iostream>
-<<<<<<< HEAD
-#include <sstream>
-#include "Barco.h"
-#include "Cola.h"
-=======
 //#include <sstream>
 #include "Barco.h"
 #include "ColaEstatica.h"
->>>>>>> emanuel
 
 static int filasTablero = 10;
 static int colTablero = 10;
@@ -20,34 +14,20 @@ void disparo(Pila* p);
 
 int main(int argc, char *arg[])
 {
-    cout<<"Inicio de programa" <<endl;
+    //cout<<"Inicio de programa" <<endl;
     
     bool tablero[10][10];
     int fila, columna;
     Barco barcos[10];
-<<<<<<< HEAD
-    Cola* posiciones = new Cola(); 
+    ColaDePilas* posiciones = new ColaDePilas(); 
     Pila* sigDisparo = new Pila();
 
-   
-    for(int i=0; i<10; i++){
-        for(int j=0; i<10; j++){
-            Pila* nuevo = new Pila();
-            //nuevo->apilar(i, j); 
-=======
-    ColaDePilas* posiciones = new ColaDePilas(); 
-    //Pila* sigDisparo = new Pila();
-    //Pila* p1 = new Pila();
-    //p1->add(2, 3);
-//
-    //posiciones->encolar(p1);
     
     for(int i=0; i<10; i++){
         for(int j=0; j<10; j++){
             cout <<"Iteracion: " <<i <<"-" <<j <<endl;
             Pila* nuevo = new Pila();
             nuevo->apilar(i, j); 
->>>>>>> emanuel
             posiciones->encolar(nuevo);
         }
     }
@@ -56,17 +36,9 @@ int main(int argc, char *arg[])
 
     cout<<"Cargue los datos correctamente" <<endl;
     
-    cout<<"-----------------IMPRIMO LAS POSICIONES---------" <<endl;
+    cout<<"---------IMPRIMO LAS POSICIONES---------" <<endl;
     posiciones->imprimir();
 
-<<<<<<< HEAD
-    cout<<"Cargue los datos correctamente" <<endl;
-    
-
-    posiciones->imprimir();
-
-=======
->>>>>>> emanuel
     cout << "Llegue al final";
    
     /*
@@ -81,13 +53,6 @@ int main(int argc, char *arg[])
 
     
     //cout <<"Llegue al final" <<endl;
-<<<<<<< HEAD
-    system("PAUSE");
-    return EXIT_SUCCESS;
-
-}
-/*
-=======
     //system("PAUSE");
     //return EXIT_SUCCESS;
 
@@ -111,7 +76,6 @@ void disparo (Pila* p){
     }
 }*/
 
->>>>>>> emanuel
 void disparo (Pila* p){
     char estado;
 
@@ -134,4 +98,4 @@ void disparo (Pila* p){
         default: cout << "Ingreso una letra incorrecta";
     }
 
-}*/
+}
