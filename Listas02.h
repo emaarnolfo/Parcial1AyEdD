@@ -5,7 +5,7 @@
 
 using namespace std;
 
-class Nodo {
+class Nodo{
     private:
         int fila;
         int col;

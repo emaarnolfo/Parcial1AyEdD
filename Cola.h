@@ -12,7 +12,7 @@ class Cola{
               Pila* v[MaxCola];
               int ult;
       public:
-      Cola(void){ult=-1;}
+      Cola(void){ult = 0;}
       Pila* tope();
       bool colavacia();
       void encolar(Pila* a) ;
@@ -22,19 +22,22 @@ class Cola{
 
 Pila* Cola::tope(){
     if(colavacia()){
-                    cout<<endl<<"ERROR cola vacia"<<endl;
+                    cout<<endl<<"TOPE: ERROR cola vacia"<<endl;
                     return NULL;
     }
     else return v[0];
 }
 
 bool Cola::colavacia(){
-     return ult==-1;
+     return ult == 1;
 }
 
 void Cola::encolar(Pila* a){
-     if (ult<MaxCola-1) v[++ult]=a;
-     else cout<<"ERROR cola llena"<<endl;
+     if (ult<MaxCola){
+     v[ult]=a;
+     ult++;
+     } 
+     else cout<<"ENCOLAR: ERROR cola llena"<<endl;
 }
 void Cola::desencolar(){
      for(int i=0;i<ult;i++)
@@ -47,4 +50,5 @@ void Cola::imprimir(){
           this->tope()->impre();
           this->desencolar();
      }
+     cout<<"Cola vacia" <<endl;
 }

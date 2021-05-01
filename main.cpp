@@ -1,7 +1,6 @@
 #include <cstdlib>
 #include <iostream>
 #include <sstream>
-#include "Listas02.h"
 #include "Barco.h"
 #include "Cola.h"
 
@@ -11,28 +10,35 @@ int barcosHundidos = 0;
 
 using namespace std;
 
-void disparo(Pila* p){}
+void disparo(Pila* p);
 
-int main()
+int main(int argc, char *arg[])
 {
+    cout<<"Inicio de programa" <<endl;
+    
     bool tablero[10][10];
     int fila, columna;
     Barco barcos[10];
-    Cola posiciones[100]; 
+    Cola* posiciones = new Cola(); 
     Pila* sigDisparo = new Pila();
 
-    
-    for(int i=0; i<filasTablero; i++){
-        for(int j=0; i<colTablero; j++){
+   
+    for(int i=0; i<10; i++){
+        for(int j=0; i<10; j++){
             Pila* nuevo = new Pila();
-            nuevo->apilar(i, j); 
+            //nuevo->apilar(i, j); 
             posiciones->encolar(nuevo);
         }
     }
+
+    cout<<"Cargue los datos correctamente" <<endl;
     
 
     posiciones->imprimir();
 
+    cout << "Llegue al final";
+   
+    /*
     while(barcosHundidos < 10)
     {
     sigDisparo->apilar(fila, columna);             
@@ -40,12 +46,15 @@ int main()
    
     disparo(sigDisparo);
     }
+ */
 
+    
+    //cout <<"Llegue al final" <<endl;
     system("PAUSE");
     return EXIT_SUCCESS;
 
 }
-
+/*
 void disparo (Pila* p){
     char estado;
 
@@ -68,4 +77,4 @@ void disparo (Pila* p){
         default: cout << "Ingreso una letra incorrecta";
     }
 
-}
+}*/
