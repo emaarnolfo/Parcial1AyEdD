@@ -4,7 +4,10 @@
         "type_traits": "cpp",
         "xstring": "cpp",
         "xutility": "cpp",
+<<<<<<< HEAD
         "cstdlib": "cpp",
+=======
+>>>>>>> emanuel
         "iostream": "cpp"
     }
 }

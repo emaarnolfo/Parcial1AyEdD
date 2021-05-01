@@ -149,8 +149,13 @@ void Lista::impre(void)
 {
     Nodo* aux;
     aux = czo;
+    
     while (aux->get_next() != NULL) {
+<<<<<<< HEAD
         cout << aux->get_fila() << "-" <<aux->get_col();
+=======
+        cout <<"Fila: " << aux->get_fila() << " Columna:" <<aux->get_col() <<endl;
+>>>>>>> emanuel
         aux = aux->get_next();
     }
 }
@@ -188,11 +193,18 @@ public:
     Nodo* tope(void) { return this->cabeza(); };
     void desapilar(void) { this->borrar(); };
     bool pilavacia() { return this->esvacia(); };
+<<<<<<< HEAD
     void impre(){this->impre();}
 };
 
 /*
 
+=======
+    void imprimir(){this->impre();}
+};
+
+/*
+>>>>>>> emanuel
 class Cola :public Lista {
 public:
     Cola() { Lista(); };
@@ -204,9 +216,13 @@ public:
     Nodo* ultimo(void) { return this->cabeza(); };
     string imprimir(string s) { return this->toPrint(s); };
 };
+<<<<<<< HEAD
 */
 
 
 
 
 
+=======
+*/
+>>>>>>> emanuel
