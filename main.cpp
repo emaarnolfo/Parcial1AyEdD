@@ -44,15 +44,16 @@ int main(int argc, char *arg[])
     //cout << "Llegue al final" <<endl;
    
     
-    //while(barcosHundidos < 10)
-    //{
-        if(!posiciones->tope()){
+    while(barcosHundidos < 10)
+    {
+        int fil = posiciones->tope()->tope()->get_fila();           //Extraigo la fila de la posicion proxima a disparar
+        int col = posiciones->tope()->tope()->get_col();            //Extraigo la columna de la posicion proxima a disparar
+        if(!tablero[fil][col]){                                     //Pregunto si ya se realizo algun disparo en esa posicion
             sigDisparo = posiciones->tope();             
             posiciones->desencolar();
             disparo(sigDisparo);
-        }
-    
-    //}
+        }    
+    }
  
 
     
@@ -81,6 +82,7 @@ void disparo (Pila* p){
 
         case 'v':
             apilarVecinos(p);
+            
         break;
 
         case 'h':
