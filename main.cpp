@@ -72,19 +72,23 @@ void disparo (Pila* p){
 
     switch(estado){
         case 'a':
-        p->desapilar();
-        tablero[fila][columna] = true;
-        cout<<"Disparo en agua" <<endl;
+            p->desapilar();
+            tablero[fila][columna] = true;
+            cout<<"Disparo en agua" <<endl;
         break;
 
         case 'v':
         break;
 
         case 'h':
-        barcosHundidos++;
+            p->desapilar();
+            tablero[fila][columna] = true;
+            barcosHundidos++;
         break;
 
-        default: cout << "Ingreso una letra incorrecta";
+        default: 
+            cout << "Ingreso una letra incorrecta, digite nuevamente" <<endl;
+            disparo(p);
     }
 
 }
