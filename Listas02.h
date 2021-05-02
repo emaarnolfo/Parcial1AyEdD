@@ -38,11 +38,11 @@ class Lista {
         bool esta(int x, int y);
         Nodo* last();
         void borrarDato(int x, int y);
-        void borrar(void);                      //Borra la cabeza
-        void borrar_last();                     //Borra el ultimo
-        //void concat(Lista* l1);                 //Le transfiere los datos de l1 a this
-       // Lista* copy(void);                     //hace una copia de la lista
-        void tomar(int n);                      //deja vivos los n primero nodos y borra el resto
+        void borrar(void);                     //Borra la cabeza
+        void borrar_last();                    //Borra el ultimo
+        //void concat(Lista* l1);              //Le transfiere los datos de l1 a this
+       // Lista* copy(void);                   //hace una copia de la lista
+        void tomar(int n);                     //deja vivos los n primero nodos y borra el resto
 };
 
 void Lista::add(int a, int b) //100

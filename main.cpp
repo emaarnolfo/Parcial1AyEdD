@@ -18,10 +18,14 @@ int main(int argc, char *arg[])
     //cout<<"Inicio de programa" <<endl;
 
     int fila, columna;
-    Barco barcos[10];
+    Barco barcos[1];
     ColaDePilas* posiciones = new ColaDePilas(); 
     Pila* sigDisparo;
 
+    //for(int i=0; i<10; i++){
+    barcos->impreBarco();
+	//}
+/*
     
     for(int i=0; i<10; i++){
         for(int j=0; j<10; j++){
@@ -33,26 +37,26 @@ int main(int argc, char *arg[])
         }
     }
     
-    
 
     cout<<"Cargue los datos correctamente" <<endl;
     
     cout<<"---------IMPRIMO LAS POSICIONES---------" <<endl;
-
     posiciones->imprimir();
 
     //cout << "Llegue al final" <<endl;
+
    
     
     //while(barcosHundidos < 10)
     //{
+        /*
     sigDisparo = posiciones->tope();             
     posiciones->desencolar();
     disparo(sigDisparo);
     
     //}
  
-
+*/
     
     cout <<"Llegue al final" <<endl;
     system("PAUSE");
