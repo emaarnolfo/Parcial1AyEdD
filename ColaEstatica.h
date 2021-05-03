@@ -4,7 +4,7 @@
 #include <sstream>
 #include "Listas02.h"
 
-#define MAX 101
+#define MAX 101             //La cola almacena MAX-1 elementos
 
 using namespace std;
 
