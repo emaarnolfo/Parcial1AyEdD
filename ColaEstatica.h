@@ -47,8 +47,8 @@ Pila* ColaDePilas::ultimo(void){
 
 void ColaDePilas::imprimir(){
     if (!colavacia()) {
-       for (int i=0; i<MAX; i++){
-            //cout<<"Llamo a impre de pila" <<endl;
+       for (int i=0; i<MAX-1; i++){
+            cout<<"Llamo a impre de pila" <<endl;
             Q[i]->imprimir();
        }
     }else{

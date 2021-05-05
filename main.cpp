@@ -13,11 +13,11 @@ Barco barcos[10];
 using namespace std;
 
 void primerDisparo(Pila* p);
-void apilarVecinos(Pila* p);
-void apilarNvoDisparo(Pila* p, int fil, int col);
 void segundoDisparo(Pila* p, int fil, int col);
 void tercerDisparo(Pila* p, int fil, int col);
-void cuartoDisparo(Pila* p, int fil, int col);
+void cuartoDisparo(Pila* p);
+void apilarVecinos(Pila* p);
+void apilarNvoDisparo(Pila* p, int fil, int col);
 
 int main(int argc, char *arg[])
 {
@@ -43,11 +43,11 @@ int main(int argc, char *arg[])
     cout<<"Cargue los datos correctamente" <<endl;
     cout<<"---------IMPRIMO LAS POSICIONES---------" <<endl;
 
-    //posiciones->imprimir();
+    posiciones->imprimir();
 
    
     
-    while(barcosHundidos<10 || !(posiciones->colavacia()))
+    while(barcosHundidos<10)
     {
         int fil = posiciones->tope()->tope()->get_fila();           //Extraigo la fila de la posicion proxima a disparar
         int col = posiciones->tope()->tope()->get_col();            //Extraigo la columna de la posicion proxima a disparar
@@ -56,17 +56,25 @@ int main(int argc, char *arg[])
             sigDisparo = posiciones->tope();             
             posiciones->desencolar();
             primerDisparo(sigDisparo);
-        }    
+        }   
+        if(posiciones->colavacia()){
+            cout << "Llegué al final del tablero" <<endl <<endl;
+            break;
+        }
     }
 
+    cout << "Todos los barcos hundidos" <<endl<<endl;
+
+    /*
     cout << "Las posiciones de los barcos son las siguientes: " <<endl;
     for(int i=0; i < barcosHundidos; i++){
         barcos[i].imprimeBarco();
     }
-    
+  */  
     cout <<"Llegue al final" <<endl;
+    
     system("PAUSE");
-    return EXIT_SUCCESS;
+    //return EXIT_SUCCESS;
 
 }
 
@@ -84,7 +92,6 @@ void primerDisparo (Pila* p){
         case 'a':
             p->desapilar();
             tablero[fila][columna] = true;
-            cout<<"Disparo en agua" <<endl;
         break;
 
         case 'v':

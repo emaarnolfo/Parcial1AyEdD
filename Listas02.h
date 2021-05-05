@@ -11,14 +11,14 @@ class Nodo {
         int col;
         Nodo* next;
     public:
-        Nodo() { next = NULL; };
-        Nodo(int x, int y) { fila = x; col = y; next = NULL; };
+        Nodo() { next = 0; };
+        Nodo(int x, int y) { fila = x; col = y; next = 0; };
         void set_dato(int x, int y) { fila = x; fila = y; };
         void set_next(Nodo* n) { next = n; };
         int get_fila() { return fila; };
         int get_col() { return col; };
         Nodo* get_next() { return next; };
-        bool es_vacio() { return next == NULL; };
+        bool es_vacio() { return next == 0; };
 
 };
 
@@ -147,10 +147,10 @@ void Lista::tomar(int n)
 
 void Lista::impre(void)
 {
-    Nodo* aux;
+    Nodo* aux = new Nodo;
     aux = czo;
     
-    while (aux->get_next() != NULL) {
+    while (aux->get_next() != 0) {
         cout <<"Fila: " << aux->get_fila() << " Columna:" <<aux->get_col() <<endl;
         aux = aux->get_next();
     }
@@ -191,17 +191,3 @@ public:
     bool pilavacia() { return this->esvacia(); };
     void imprimir(){this->impre();}
 };
-
-/*
-class Cola :public Lista {
-public:
-    Cola() { Lista(); };
-    ~Cola(void);
-    Nodo* tope() { return this->last(); };
-    bool colavacia(void) { return this->esvacia(); };
-    void encolar(int a, int b) { this->add(a, b); };
-    void desencolar(void) { this->borrar_last(); };
-    Nodo* ultimo(void) { return this->cabeza(); };
-    string imprimir(string s) { return this->toPrint(s); };
-};
-*/
