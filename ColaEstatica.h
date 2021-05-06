@@ -1,7 +1,10 @@
 <<<<<<< HEAD
+<<<<<<< HEAD
 // Cola Circular con Arreglo.cpp : 
 =======
 
+>>>>>>> emanuel
+=======
 >>>>>>> emanuel
 #include <cstdlib>
 #include <iostream>
@@ -36,10 +39,10 @@ class ColaDePilas {
         bool colallena() { return frente == (ult + 2) % MAX; };
         void encolar(Pila* a);
         void desencolar();
-        Pila* ultimo();
         void imprimir();
     };
 
+<<<<<<< HEAD
 
 <<<<<<< HEAD
 //-------- Metodos de la Cola de Pilas --------------------
@@ -51,6 +54,8 @@ void ColaDePilas::encolar(Pila* a){
         cout<<"Encole correctamente" <<endl;
 =======
 //
+=======
+>>>>>>> emanuel
 void ColaDePilas::encolar(Pila* a){
     if (!colallena()) {
         ult = (ult + 1) % MAX;
@@ -65,6 +70,7 @@ void ColaDePilas::desencolar(void){
     else cout << "Cola vacia" << endl;
 }
 
+<<<<<<< HEAD
 Pila* ColaDePilas::ultimo(void){
 <<<<<<< HEAD
     return Q[ult];
@@ -73,6 +79,8 @@ Pila* ColaDePilas::ultimo(void){
 >>>>>>> emanuel
 }
 
+=======
+>>>>>>> emanuel
 void ColaDePilas::imprimir(){
     if (!colavacia()) {
 <<<<<<< HEAD
