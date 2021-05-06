@@ -32,6 +32,7 @@ int main(int argc, char *arg[])
     ColaDePilas* posiciones = new ColaDePilas(); 
     Pila* sigDisparo;
     
+    cout<<"Bienvenido a la batalla naval.." <<endl <<endl;
     cargarDisparosConsecutivos(posiciones);
     //cargarDisparosAleatorios(posiciones);
     //cargarDisparosConsecutivos2(posiciones)

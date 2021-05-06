@@ -1,7 +1,7 @@
 #include <cstdlib>
 #include <iostream>
 #include <sstream>
-#include "Listas02.h"
+#include "Listas.h"
 
 #define MAX 101                       //La cola almacena MAX-1 elementos
 
