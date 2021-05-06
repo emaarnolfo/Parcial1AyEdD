@@ -19,10 +19,14 @@ int main(int argc, char *arg[])
     //cout<<"Inicio de programa" <<endl;
 
     int fila, columna;
-    Barco barcos[10];
+    Barco barcos[1];
     ColaDePilas* posiciones = new ColaDePilas(); 
     Pila* sigDisparo;
 
+    //for(int i=0; i<10; i++){
+    barcos->impreBarco();
+	//}
+/*
     
     for(int i=0; i<10; i++){
         for(int j=0; j<10; j++){
@@ -93,26 +97,27 @@ int main(int argc, char *arg[])
         }
     }
     
-    
 
 <<<<<<< HEAD
     cout<<"Cargue los datos correctamente" <<endl;
     
     cout<<"---------IMPRIMO LAS POSICIONES---------" <<endl;
-
     posiciones->imprimir();
 
     //cout << "Llegue al final" <<endl;
+
    
     
     //while(barcosHundidos < 10)
     //{
+        /*
     sigDisparo = posiciones->tope();             
     posiciones->desencolar();
     disparo(sigDisparo);
     
     //}
  
+<<<<<<< HEAD
 =======
     if(barcosHundidos == n_barcos){
         cout << "Todos los barcos hundidos" <<endl<<endl;
@@ -125,6 +130,9 @@ int main(int argc, char *arg[])
     }
 >>>>>>> emanuel
 
+=======
+*/
+>>>>>>> c70a39139189c1c0ba2cb43b46d78958fdd0d4d2
     
     cout <<"Llegue al final" <<endl;
     system("PAUSE");
@@ -304,6 +312,7 @@ void tercerDisparo(Pila* p, int fila2, int columna2){
                 anularCasillero(fila3, columna3-1);
             }
 
+<<<<<<< HEAD
             //El disparo averiado fue en la posicion de ABAJO con respecto al disparo anterior
             if(fila3>fila2){
                 apilarNvoDisparo(p, fila3-3, columna3);
@@ -465,4 +474,6 @@ void anularVecinos(Pila* p){
 void anularCasillero(int fil, int col){
     if(fil<=9 && fil>=0 && col>=0 && col<=9)
         tablero[fil][col] = true;
+=======
+>>>>>>> c70a39139189c1c0ba2cb43b46d78958fdd0d4d2
 }
