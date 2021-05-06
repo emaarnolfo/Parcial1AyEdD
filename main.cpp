@@ -38,7 +38,8 @@ int main(int argc, char *arg[])
         <<"- 1 Destructor de tamanio 4" <<endl
         <<"- 2 Cruceros de tamanio 2" <<endl
         <<"- 3 Canioneras de tamanio 2" <<endl
-        <<"- 4 Submarinos de tamanio 1" <<endl <<endl;
+        <<"- 4 Submarinos de tamanio 1" <<endl <<endl
+        <<"Indique si el disparo fue agua, averiado, o hundido con 'a', 'v' y 'h' respectivamente" <<endl <<endl;
 
     //cargarDisparosConsecutivos(posiciones);
     cargarDisparosAleatorios(posiciones);
