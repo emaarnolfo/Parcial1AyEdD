@@ -24,6 +24,7 @@ void anularVecinos(Pila* p);
 void anularCasillero(int fil, int col);
 void cargarDisparosConsecutivos(ColaDePilas* pos);
 void cargarDisparosAleatorios(ColaDePilas* pos);
+void cargarDisparosConsecutivos2(ColaDePilas* pos);
 
 int main(int argc, char *arg[])
 {
@@ -35,7 +36,7 @@ int main(int argc, char *arg[])
     cout<<"Bienvenido a la batalla naval.." <<endl <<endl;
     cargarDisparosConsecutivos(posiciones);
     //cargarDisparosAleatorios(posiciones);
-    //cargarDisparosConsecutivos2(posiciones)
+    //cargarDisparosConsecutivos2(posiciones);
 
     //Iprime las posiciones en las que va a disparar
     //cout<<"---------IMPRIMO LAS POSICIONES---------" <<endl;
