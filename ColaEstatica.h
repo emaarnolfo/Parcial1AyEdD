@@ -1,4 +1,3 @@
-
 #include <cstdlib>
 #include <iostream>
 #include <sstream>
@@ -20,12 +19,9 @@ class ColaDePilas {
         bool colallena() { return frente == (ult + 2) % MAX; };
         void encolar(Pila* a);
         void desencolar();
-        Pila* ultimo();
         void imprimir();
     };
 
-
-//
 void ColaDePilas::encolar(Pila* a){
     if (!colallena()) {
         ult = (ult + 1) % MAX;
@@ -37,10 +33,6 @@ void ColaDePilas::encolar(Pila* a){
 void ColaDePilas::desencolar(void){
     if (!colavacia())frente = (frente + 1) % MAX;
     else cout << "Cola vacia" << endl;
-}
-
-Pila* ColaDePilas::ultimo(void){
-    return pilas[ult];
 }
 
 void ColaDePilas::imprimir(){
