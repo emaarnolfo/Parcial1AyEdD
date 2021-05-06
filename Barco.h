@@ -28,25 +28,25 @@ void Barco::set_pos(int indice, int f, int c){
 
 void Barco::set_tipo(int x){
     if(x==0){
-        tipo = "submarino";
+        tipo = "Submarino";
         size = x+1;
     }
     if(x==1){
-        tipo = "cañonera";
+        tipo = "Cañonera";
         size = x+1;
     }
     if(x==2){
-        tipo = "crucero";
+        tipo = "Crucero";
         size = x+1;
     }
     if(x==3){
-        tipo = "destructor";
+        tipo = "Destructor";
         size = x+1;
     }
 }
 
 void Barco::imprimeBarco(){
-    cout <<"El " <<tipo <<" esta en la posicion:";
+    cout <<tipo <<" en la posicion:";
     for(int i = 0; i < size; i++){
         cout<<" <" <<pos[i].fila <<"-" <<pos[i].columna <<"> ";
     }

@@ -24,6 +24,7 @@ void anularVecinos(Pila* p);
 void anularCasillero(int fil, int col);
 void cargarDisparosConsecutivos(ColaDePilas* pos);
 void cargarDisparosAleatorios(ColaDePilas* pos);
+void cargarDisparosAleatorios2(ColaDePilas* pos);
 
 int main(int argc, char *arg[])
 {
@@ -32,9 +33,15 @@ int main(int argc, char *arg[])
     ColaDePilas* posiciones = new ColaDePilas(); 
     Pila* sigDisparo;
     
-    cout<<"Bienvenido a la batalla naval.." <<endl <<endl;
-    cargarDisparosConsecutivos(posiciones);
-    //cargarDisparosAleatorios(posiciones);
+    cout<<"Bienvenido a la batalla naval.." <<endl
+        <<"Ubique los 10 barcos en su tablero: " <<endl
+        <<"- 1 Destructor de tamanio 4" <<endl
+        <<"- 2 Cruceros de tamanio 2" <<endl
+        <<"- 3 Canioneras de tamanio 2" <<endl
+        <<"- 4 Submarinos de tamanio 1" <<endl <<endl;
+
+    //cargarDisparosConsecutivos(posiciones);
+    cargarDisparosAleatorios(posiciones);
     //cargarDisparosConsecutivos2(posiciones)
 
     //Iprime las posiciones en las que va a disparar
@@ -61,8 +68,7 @@ int main(int argc, char *arg[])
             break;
         }
     }
-    
-    
+
 
     if(barcosHundidos == n_barcos){
         cout << "Todos los barcos hundidos" <<endl<<endl;
@@ -71,11 +77,9 @@ int main(int argc, char *arg[])
         for(int i=0; i < barcosHundidos; i++){
             barcos[i].imprimeBarco();
         }
-    cout << "Se encontraron todos los barcos en " << disp_realizados <<" disparos" <<endl;
+    cout <<endl << "Se encontraron todos los barcos en " << disp_realizados <<" disparos" <<endl;
     }
 
-    
-    cout <<"Llegue al final" <<endl;
     system("PAUSE");
 }
 
@@ -112,7 +116,7 @@ void primerDisparo (Pila* p){
             barcos[barcosHundidos].set_tipo(0);
             barcosHundidos++;
             anularVecinos(p);
-            cout << "Submarino hundido" <<endl;
+            cout << "Submarino hundido" <<endl <<endl;
         break;
     
         //Vuelve a llamar a la misma funcion si digita una letra que no sea a, v o h
@@ -190,7 +194,7 @@ void segundoDisparo(Pila* p, int fil1, int col1){               //fil y col de l
             barcos[barcosHundidos].set_tipo(1);
             barcosHundidos++;
             anularVecinos(p);
-            cout << "Canionera hundida" <<endl;
+            cout << "Canionera hundida" <<endl <<endl;
         break;
 
         //Vuelve a llamar a la misma funcion si digita una letra que no sea a, v o h
@@ -262,7 +266,7 @@ void tercerDisparo(Pila* p, int fila2, int columna2){
             barcos[barcosHundidos].set_tipo(2);
             barcosHundidos++;
             anularVecinos(p);
-            cout << "Crucero hundido" <<endl;
+            cout << "Crucero hundido" <<endl <<endl;
         break;
 
         //Vuelve a llamar a la misma funcion si digita una letra que no sea a, v o h
@@ -291,12 +295,12 @@ void cuartoDisparo(Pila* p){
         break;
 
         case 'h':
-            cout << "Destructor hundido" <<endl;
             tablero[fila4][columna4] = true;
             barcos[barcosHundidos].set_pos(3, fila4, columna4);
             barcos[barcosHundidos].set_tipo(3);
             barcosHundidos++;
             anularVecinos(p);
+            cout << "Destructor hundido" <<endl <<endl;
         break;
 
         //Vuelve a llamar a la misma funcion si digita una letra que no sea a, v o h
