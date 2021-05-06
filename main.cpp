@@ -24,11 +24,7 @@ void anularVecinos(Pila* p);
 void anularCasillero(int fil, int col);
 void cargarDisparosConsecutivos(ColaDePilas* pos);
 void cargarDisparosAleatorios(ColaDePilas* pos);
-<<<<<<< HEAD
-void cargarDisparosAleatorios2(ColaDePilas* pos);
-=======
 void cargarDisparosConsecutivos2(ColaDePilas* pos);
->>>>>>> d4af9c1f002d4e46635ba662e1750e4ce9aa5fc2
 
 int main(int argc, char *arg[])
 {
@@ -37,7 +33,6 @@ int main(int argc, char *arg[])
     ColaDePilas* posiciones = new ColaDePilas(); 
     Pila* sigDisparo;
     
-<<<<<<< HEAD
     cout<<"Bienvenido a la batalla naval.." <<endl
         <<"Ubique los 10 barcos en su tablero: " <<endl
         <<"- 1 Destructor de tamanio 4" <<endl
@@ -49,12 +44,6 @@ int main(int argc, char *arg[])
     //cargarDisparosConsecutivos(posiciones);
     cargarDisparosAleatorios(posiciones);
     //cargarDisparosConsecutivos2(posiciones)
-=======
-    cout<<"Bienvenido a la batalla naval.." <<endl <<endl;
-    cargarDisparosConsecutivos(posiciones);
-    //cargarDisparosAleatorios(posiciones);
-    //cargarDisparosConsecutivos2(posiciones);
->>>>>>> d4af9c1f002d4e46635ba662e1750e4ce9aa5fc2
 
     //Iprime las posiciones en las que va a disparar
     //cout<<"---------IMPRIMO LAS POSICIONES---------" <<endl;
