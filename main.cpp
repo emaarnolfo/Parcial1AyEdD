@@ -1,6 +1,7 @@
 #include <cstdlib>
 #include <iostream>
 #include <sstream>
+#include <time.h>
 #include "Barco.h"
 #include "ColaEstatica.h"
 
@@ -20,67 +21,34 @@ void apilarVecinos(Pila* p);
 void apilarNvoDisparo(Pila* p, int fil, int col);
 void anularVecinos(Pila* p);
 void anularCasillero(int fil, int col);
+void cargarDisparosConsecutivos(ColaDePilas* pos);
+void cargarDisparosAleatorios(ColaDePilas* pos);
 
 int main(int argc, char *arg[])
 {
-    //cout<<"Inicio de programa" <<endl;
-    int fila, columna;
+    //int fila, columna;
     int disp_realizados = 0;
     barcosHundidos = 0;
     ColaDePilas* posiciones = new ColaDePilas(); 
     Pila* sigDisparo;
-    bool asignados[10][10]={false};
+    
+    cargarDisparosConsecutivos(posiciones);
+    //cargarDisparosAleatorios(posiciones);
 
-/*
-    for(int i=0; i<10; i++){                                        //METODO: Cargar posicoines consecutivo
-        for(int j=0; j<10; j++){
-            //cout <<"Iteracion: " <<i <<"-" <<j <<endl;
-            tablero[i][j] = false;
-            Pila* nuevo = new Pila();
-            nuevo->apilar(i, j); 
-            posiciones->encolar(nuevo);
-        }
-    }
-  */  
-
-    //Cargar posiciones aleatorio
-
-    for(int i=0; i<10; i++){
-        for(int j=0; j<10; j++){
-            //cout <<"Iteracion: " <<i <<"-" <<j <<endl;
-          	int a,b;
-          	do {
-          		a=rand()%10;
-          		b=rand()%10;
-                  //cout<< "while" <<endl;
-			}while(asignados[a][b]);
-
-          	asignados[a][b]=true;
-
-          	//cout<<"estoy en fila "<<a<<" columna "<<b<<endl;
-
-			tablero[a][b] = false;
-            Pila* nuevo = new Pila();
-            nuevo->apilar(a, b); 
-            posiciones->encolar(nuevo);
-        }
-    }
-
-    cout<<"Cargue los datos correctamente" <<endl <<endl;
+    //Iprime las posiciones en las que va a disparar
     cout<<"---------IMPRIMO LAS POSICIONES---------" <<endl;
-    //posiciones->imprimir();
+    posiciones->imprimir();
+    
     
     while(barcosHundidos<10)
     {
-       // cout <<"a" <<endl;
         int fil = posiciones->tope()->tope()->get_fila();           //Extraigo la fila de la posicion proxima a disparar
         int col = posiciones->tope()->tope()->get_col();            //Extraigo la columna de la posicion proxima a disparar
-        //cout << fila <<"-" <<columna;
+
         if(!tablero[fil][col]){                                     //Pregunto si ya se realizo algun disparo en esa posicion
             disp_realizados++;
             sigDisparo = posiciones->tope();             
             primerDisparo(sigDisparo);
-            //cout << "llegue al while" <<endl;
         }
         posiciones->desencolar();  
         
@@ -94,10 +62,10 @@ int main(int argc, char *arg[])
         cout << "Todos los barcos hundidos" <<endl<<endl;
 
     
-   // cout << "Las posiciones de los barcos son las siguientes: " <<endl;
-   // for(int i=0; i < barcosHundidos; i++){
-   //     barcos[i].imprimeBarco();
-   // }
+    cout << "Las posiciones de los barcos son las siguientes: " <<endl;
+    for(int i=0; i < barcosHundidos; i++){
+        barcos[i].imprimeBarco();
+    }
 
     cout << "Se encontraron todos los barcos en " << disp_realizados <<" disparos" <<endl;
     
@@ -112,8 +80,8 @@ void primerDisparo (Pila* p){
     int fila = p->tope()->get_fila();                                           //extraigo la fila donde voy a realizar el primer disparo
     int columna = p->tope()->get_col();                                         //extraigo la columna donde voy a realizar el primer disparo
 
-
-    cout << "Disparo en fila: " << fila <<" y columna: " <<columna <<endl;        //pregunto el estado de la fila y columna a la que disparo
+    //pregunto el estado de la fila y columna a la que disparo
+    cout << "Disparo en fila: " << fila <<" y columna: " <<columna <<endl;        
     cout << "Indique estado: ";
     cin  >> estado;
 
@@ -128,7 +96,6 @@ void primerDisparo (Pila* p){
             tablero[fila][columna] = true;
             barcos[barcosHundidos].set_pos(0, fila, columna);
             apilarVecinos(p);
-            //anularVecinos(p);
             segundoDisparo(p, fila, columna);
         break;
 
@@ -308,6 +275,41 @@ void cuartoDisparo(Pila* p){
     }
 }
 
+void cargarDisparosConsecutivos(ColaDePilas* pos){
+    for(int i=0; i<10; i++){                                       
+        for(int j=0; j<10; j++){
+            tablero[i][j] = false;
+            Pila* nuevo = new Pila();
+            nuevo->apilar(i, j); 
+            pos->encolar(nuevo);
+        }
+    }
+}
+
+void cargarDisparosAleatorios(ColaDePilas* pos){
+    bool asignados[10][10]={false};
+    for(int i=0; i<10; i++){
+        for(int j=0; j<10; j++){
+            //cout <<"Iteracion: " <<i <<"-" <<j <<endl;
+          	int a,b;
+          	do {
+          		a=rand()%10;
+          		b=rand()%10;
+                  //cout<< "while" <<endl;
+			}while(asignados[a][b]);
+
+          	asignados[a][b]=true;
+
+          	//cout<<"estoy en fila "<<a<<" columna "<<b<<endl;
+
+			tablero[a][b] = false;
+            Pila* nuevo = new Pila();
+            nuevo->apilar(a, b); 
+            pos->encolar(nuevo);
+        }
+    }
+}
+
 void apilarVecinos(Pila* p){
     int fila, columna;
     fila = p->tope()->get_fila();
@@ -323,7 +325,7 @@ void apilarNvoDisparo(Pila* p, int fil, int col){
     if(fil<=9 && fil>=0 && col>=0 && col<=9){            // Compruebo que la posicion a apilar esta dentro del tablero
         if(tablero[fil][col] != true){                   // Compruebo que en la posicion a apilar no se diparo antes
             p->apilar(fil, col);                         // Apilo la nueva posicion
-            //tablero[fil][col] = true;                    // Marco la posicion del disparo en el tablero para no repetirla
+            //tablero[fil][col] = true;                    
         }
     }
 }
