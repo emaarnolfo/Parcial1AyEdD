@@ -45,7 +45,7 @@ class Lista {
         void tomar(int n);                      //deja vivos los n primero nodos y borra el resto
 };
 
-void Lista::add(int a, int b) //100
+void Lista::add(int a, int b)
 {
     Nodo* nuevo = new Nodo(a, b);
     nuevo->set_next(czo);

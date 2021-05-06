@@ -18,6 +18,8 @@ void tercerDisparo(Pila* p, int fil, int col);
 void cuartoDisparo(Pila* p);
 void apilarVecinos(Pila* p);
 void apilarNvoDisparo(Pila* p, int fil, int col);
+void anularVecinos(Pila* p);
+void anularCasillero(int fil, int col);
 
 int main(int argc, char *arg[])
 {
@@ -27,51 +29,78 @@ int main(int argc, char *arg[])
     barcosHundidos = 0;
     ColaDePilas* posiciones = new ColaDePilas(); 
     Pila* sigDisparo;
+    bool asignados[10][10]={false};
 
-    
-    for(int i=0; i<10; i++){
+/*
+    for(int i=0; i<10; i++){                                        //METODO: Cargar posicoines consecutivo
         for(int j=0; j<10; j++){
-            cout <<"Iteracion: " <<i <<"-" <<j <<endl;
+            //cout <<"Iteracion: " <<i <<"-" <<j <<endl;
             tablero[i][j] = false;
             Pila* nuevo = new Pila();
             nuevo->apilar(i, j); 
             posiciones->encolar(nuevo);
         }
     }
-    
-    
-    cout<<"Cargue los datos correctamente" <<endl;
+  */  
+
+    //Cargar posiciones aleatorio
+
+    for(int i=0; i<10; i++){
+        for(int j=0; j<10; j++){
+            //cout <<"Iteracion: " <<i <<"-" <<j <<endl;
+          	int a,b;
+          	do {
+          		a=rand()%10;
+          		b=rand()%10;
+                  //cout<< "while" <<endl;
+			}while(asignados[a][b]);
+
+          	asignados[a][b]=true;
+
+          	//cout<<"estoy en fila "<<a<<" columna "<<b<<endl;
+
+			tablero[a][b] = false;
+            Pila* nuevo = new Pila();
+            nuevo->apilar(a, b); 
+            posiciones->encolar(nuevo);
+        }
+    }
+
+    cout<<"Cargue los datos correctamente" <<endl <<endl;
     cout<<"---------IMPRIMO LAS POSICIONES---------" <<endl;
-
-    posiciones->imprimir();
-
-   
+    //posiciones->imprimir();
     
     while(barcosHundidos<10)
     {
+       // cout <<"a" <<endl;
         int fil = posiciones->tope()->tope()->get_fila();           //Extraigo la fila de la posicion proxima a disparar
         int col = posiciones->tope()->tope()->get_col();            //Extraigo la columna de la posicion proxima a disparar
+        //cout << fila <<"-" <<columna;
         if(!tablero[fil][col]){                                     //Pregunto si ya se realizo algun disparo en esa posicion
             disp_realizados++;
             sigDisparo = posiciones->tope();             
-            posiciones->desencolar();
             primerDisparo(sigDisparo);
-        }   
+            //cout << "llegue al while" <<endl;
+        }
+        posiciones->desencolar();  
+        
         if(posiciones->colavacia()){
-            cout << "Llegué al final del tablero" <<endl <<endl;
+            cout << "Llegue al final del tablero" <<endl <<endl;
             break;
         }
     }
 
-    cout << "Todos los barcos hundidos" <<endl<<endl;
+    if(barcosHundidos==10)
+        cout << "Todos los barcos hundidos" <<endl<<endl;
 
-    /*
-    cout << "Las posiciones de los barcos son las siguientes: " <<endl;
-    for(int i=0; i < barcosHundidos; i++){
-        barcos[i].imprimeBarco();
-    }
-  */  
-    cout <<"Llegue al final" <<endl;
+    
+   // cout << "Las posiciones de los barcos son las siguientes: " <<endl;
+   // for(int i=0; i < barcosHundidos; i++){
+   //     barcos[i].imprimeBarco();
+   // }
+
+    cout << "Se encontraron todos los barcos en " << disp_realizados <<" disparos" <<endl;
+    
     
     system("PAUSE");
     //return EXIT_SUCCESS;
@@ -80,15 +109,16 @@ int main(int argc, char *arg[])
 
 void primerDisparo (Pila* p){
     char estado;
-    int fila = p->tope()->get_fila();                   //extraigo la fila donde voy a realizar el primer disparo
-    int columna = p->tope()->get_col();                 //extraigo la columna donde voy a realizar el primer disparo
+    int fila = p->tope()->get_fila();                                           //extraigo la fila donde voy a realizar el primer disparo
+    int columna = p->tope()->get_col();                                         //extraigo la columna donde voy a realizar el primer disparo
 
 
     cout << "Disparo en fila: " << fila <<" y columna: " <<columna <<endl;        //pregunto el estado de la fila y columna a la que disparo
-    cout << "Indique estado:";
+    cout << "Indique estado: ";
     cin  >> estado;
 
-    switch(estado){
+    switch(estado)
+    {
         case 'a':
             p->desapilar();
             tablero[fila][columna] = true;
@@ -96,27 +126,26 @@ void primerDisparo (Pila* p){
 
         case 'v':
             tablero[fila][columna] = true;
-            barcos[barcosHundidos].set_pos(1, fila, columna);
-
+            barcos[barcosHundidos].set_pos(0, fila, columna);
             apilarVecinos(p);
+            //anularVecinos(p);
             segundoDisparo(p, fila, columna);
-
         break;
 
         case 'h':
-            //p->desapilar();
             tablero[fila][columna] = true;
-            barcos[barcosHundidos].set_pos(1, fila, columna);
-            barcos[barcosHundidos].set_tipo(1);
+            barcos[barcosHundidos].set_pos(0, fila, columna);
+            barcos[barcosHundidos].set_tipo(0);
             barcosHundidos++;
+            anularVecinos(p);
             cout << "Submarino hundido" <<endl;
         break;
-
+    
         default: 
             cout << "Ingreso una letra incorrecta, digite nuevamente" <<endl;
             primerDisparo(p);
     }
-
+    
 }
 
 void segundoDisparo(Pila* p, int fil1, int col1){               //fil y col de la posicion del disparo anterior
@@ -126,46 +155,56 @@ void segundoDisparo(Pila* p, int fil1, int col1){               //fil y col de l
     char estado;
 
     cout << "Disparo en fila: " << fila2 <<" y columna: " <<columna2 <<endl;        //pregunto el estado de la fila y columna del segundo disparo
-    cout << "Indique estado:";
+    cout << "Indique estado: ";
     cin  >> estado;
 
     switch(estado){
+    
         case 'a':
             tablero[fila2][columna2] = true;
             p->desapilar();
-            segundoDisparo(p, fil1, col1);                                    //Llamo nuevamente a segundo disparo con la fila y columna del disparo anterior
+            segundoDisparo(p, fil1, col1);                               //Llamo nuevamente a segundo disparo con la fila y columna del disparo anterior
         break;
 
         case 'v':
             tablero[fila2][columna2] = true;
-            barcos[barcosHundidos].set_pos(2, fila2, columna2);
+            barcos[barcosHundidos].set_pos(1, fila2, columna2);
             
             if(fila2<fil1){                                                  //El disparo averiado fue en la posicion de ARRIBA con respecto al disparo anterior
                 apilarNvoDisparo(p, fila2+2, columna2);                     //Apilo la posicion de abajo primero por si debo cambiar de direccion
                 apilarNvoDisparo(p, fila2-1, columna2);                     //Apilo la posicion de arriba
+                anularCasillero(fila2, columna2+1);
+                anularCasillero(fila2, columna2-1);
+                
             }
             if(fila2>fil1){                                                  //El disparo averiado fue en la posicion de ABAJO con respecto al disparo anterior
                 apilarNvoDisparo(p, fila2-2, columna2);
                 apilarNvoDisparo(p, fila2+1, columna2);
+                anularCasillero(fila2, columna2+1);
+                anularCasillero(fila2, columna2-1);
             }
             if(columna2<col1){                                               //El disparo averiado fue en la posicion de la IZQUIERDA con respecto al disparo anterior
                 apilarNvoDisparo(p, fila2, columna2+2);
                 apilarNvoDisparo(p, fila2, columna2-1);
+                anularCasillero(fila2+1, columna2);
+                anularCasillero(fila2-1, columna2);
             }
             if(columna2>col1){                                               //El disparo averiado fue en la posicion de la DERECHA con respecto al disparo anterior
                 apilarNvoDisparo(p, fila2, columna2-2);
                 apilarNvoDisparo(p, fila2, columna2+1);
+                anularCasillero(fila2+1, columna2);
+                anularCasillero(fila2-1, columna2);
             }
-
             tercerDisparo(p, fila2, columna2);
         break;
 
         case 'h':
             tablero[fila2][columna2] = true;
-            barcos[barcosHundidos].set_pos(2, fila2, columna2);
-            barcos[barcosHundidos].set_tipo(2);
+            barcos[barcosHundidos].set_pos(1, fila2, columna2);
+            barcos[barcosHundidos].set_tipo(1);
             barcosHundidos++;
-            cout << "Cañonera hundida" <<endl;
+            anularVecinos(p);
+            cout << "Canionera hundida" <<endl;
         break;
 
         default: 
@@ -192,29 +231,41 @@ void tercerDisparo(Pila* p, int fila2, int columna2){
 
         case 'v':
             tablero[fila3][columna3] = true;
-            barcos[barcosHundidos].set_pos(3, fila3, columna3);
+            barcos[barcosHundidos].set_pos(2, fila3, columna3);
 
-            if(fila3<fila2)
+            if(fila3<fila2){
                 apilarNvoDisparo(p, fila3+3, columna3);
                 apilarNvoDisparo(p, fila3-1, columna3);
-            if(fila3>fila2)
+                anularCasillero(fila3, columna3+1);
+                anularCasillero(fila3, columna3-1);
+            }
+            if(fila3>fila2){
                 apilarNvoDisparo(p, fila3-3, columna3);
                 apilarNvoDisparo(p, fila3+1, columna3);
-            if(columna3>columna2)
+                anularCasillero(fila3, columna3+1);
+                anularCasillero(fila3, columna3-1);
+            }
+            if(columna3>columna2){
                 apilarNvoDisparo(p, fila3, columna3-3);            
-                apilarNvoDisparo(p, fila3, columna3+1);            
-            if(columna3<columna2)
+                apilarNvoDisparo(p, fila3, columna3+1);
+                anularCasillero(fila3+1, columna3);
+                anularCasillero(fila3-1, columna3);     
+            }            
+            if(columna3<columna2){
                 apilarNvoDisparo(p, fila3, columna3+3);
                 apilarNvoDisparo(p, fila3, columna3-1);
-
+                anularCasillero(fila3+1, columna3);
+                anularCasillero(fila3-1, columna3); 
+            }
         cuartoDisparo(p);
         break;
 
         case 'h':
             tablero[fila3][columna3] = true;
-            barcos[barcosHundidos].set_pos(3, fila3, columna3);
-            barcos[barcosHundidos].set_tipo(3);
+            barcos[barcosHundidos].set_pos(2, fila3, columna3);
+            barcos[barcosHundidos].set_tipo(2);
             barcosHundidos++;
+            anularVecinos(p);
             cout << "Crucero hundido" <<endl;
         break;
 
@@ -242,11 +293,12 @@ void cuartoDisparo(Pila* p){
         break;
 
         case 'h':
-            tablero[fila4][columna4] = true;
-            barcos[barcosHundidos].set_pos(4, fila4, columna4);
-            barcos[barcosHundidos].set_tipo(4);
-            barcosHundidos++;
             cout << "Destructor hundido" <<endl;
+            tablero[fila4][columna4] = true;
+            barcos[barcosHundidos].set_pos(3, fila4, columna4);
+            barcos[barcosHundidos].set_tipo(3);
+            barcosHundidos++;
+            anularVecinos(p);
         break;
 
         default:
@@ -261,15 +313,34 @@ void apilarVecinos(Pila* p){
     fila = p->tope()->get_fila();
     columna = p->tope()->get_col();
 
-    apilarNvoDisparo(p, fila-1, columna);           //Apilo la posicion de ARRIBA
-    apilarNvoDisparo(p, fila+1, columna);           //Apilo la posicion de ABAJO
-    apilarNvoDisparo(p, fila, columna-1);           //Apilo la posicion de IZQUIERDA
-    apilarNvoDisparo(p, fila, columna+1);           //Apilo la posicion de DERECHA
+    apilarNvoDisparo(p, fila-1, columna);           // Apilo la posicion de ARRIBA
+    apilarNvoDisparo(p, fila+1, columna);           // Apilo la posicion de ABAJO
+    apilarNvoDisparo(p, fila, columna-1);           // Apilo la posicion de IZQUIERDA
+    apilarNvoDisparo(p, fila, columna+1);           // Apilo la posicion de DERECHA
 }
 
 void apilarNvoDisparo(Pila* p, int fil, int col){
-    if(fil<=9 && fil>=0 && col>=0 && col<=9){        // Compruebo que la posicion a apilar esta dentro del tablero
-        p->apilar(fil, col);                         // Apilo la nueva posicion
-        tablero[fil][col] = true;                    // Marco la posicion del disparo en el tablero para no repetirla
+    if(fil<=9 && fil>=0 && col>=0 && col<=9){            // Compruebo que la posicion a apilar esta dentro del tablero
+        if(tablero[fil][col] != true){                   // Compruebo que en la posicion a apilar no se diparo antes
+            p->apilar(fil, col);                         // Apilo la nueva posicion
+            //tablero[fil][col] = true;                    // Marco la posicion del disparo en el tablero para no repetirla
+        }
     }
+}
+
+void anularVecinos(Pila* p){
+    int fila, columna;
+    fila = p->tope()->get_fila();
+    columna = p->tope()->get_col();
+
+    anularCasillero(fila-1, columna);
+    anularCasillero(fila+1, columna);
+    anularCasillero(fila, columna-1);
+    anularCasillero(fila, columna+1);
+
+}
+
+void anularCasillero(int fil, int col){
+    if(fil<=9 && fil>=0 && col>=0 && col<=9)
+        tablero[fil][col] = true;
 }
