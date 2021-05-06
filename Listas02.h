@@ -1,25 +1,23 @@
-
 #include <cstdlib>
 #include <iostream>
 #include <sstream>
 
 using namespace std;
 
-class Nodo{
+class Nodo {
     private:
         int fila;
         int col;
         Nodo* next;
     public:
-        Nodo() { next = NULL; };
-        Nodo(int x, int y) { fila = x; col = y; next = NULL; };
+        Nodo() { next = 0; };
+        Nodo(int x, int y) { fila = x; col = y; next = 0; };
         void set_dato(int x, int y) { fila = x; fila = y; };
         void set_next(Nodo* n) { next = n; };
         int get_fila() { return fila; };
         int get_col() { return col; };
         Nodo* get_next() { return next; };
-        bool es_vacio() { return next == NULL; };
-
+        bool es_vacio() { return next == 0; };
 };
 
 class Lista {
@@ -35,14 +33,11 @@ class Lista {
         string toPrint(string p);
         void impre(void);
         int size();
-        bool esta(int x, int y);
         Nodo* last();
         void borrarDato(int x, int y);
-        void borrar(void);                     //Borra la cabeza
-        void borrar_last();                    //Borra el ultimo
-        //void concat(Lista* l1);              //Le transfiere los datos de l1 a this
-       // Lista* copy(void);                   //hace una copia de la lista
-        void tomar(int n);                     //deja vivos los n primero nodos y borra el resto
+        void borrar(void);                      //Borra la cabeza
+        void borrar_last();                     //Borra el ultimo
+        void tomar(int n);                      //deja vivos los n primero nodos y borra el resto
 };
 
 void Lista::add(int a, int b) //100
@@ -86,10 +81,8 @@ string Lista::toPrint(string p)
         return p;
     }
     else {
-        //std::ostringstream stm;
         ostringstream stm;
         stm << this->cabeza()->get_col() <<"-" <<this->cabeza()->get_fila() << "/" << this->resto()->toPrint(p) << endl;
-        //cout<<endl<<" stm.str()= "<<stm.str()<<endl;
         return stm.str();
     }
 }
@@ -120,23 +113,7 @@ void Lista::borrar_last()
     }
 }
 
-/*
-void Lista::concat(Lista* l1)
-{// le transfiere los datos de l1 a this
-    if (!(l1->esvacia())) {
-        this->concat(l1->resto());
-        this->add(l1->cabeza());
-    }
-}
-*/
-/*
-Lista* Lista::copy(void)
-{
-    Lista* aux = new Lista();
-    aux->concat(this);
-    return aux;
-}
-*/
+
 void Lista::tomar(int n)
 { //deja "vivos" los n primeros nodos y borra el resto
     if (this->size() > n) {
@@ -147,62 +124,21 @@ void Lista::tomar(int n)
 
 void Lista::impre(void)
 {
-    Nodo* aux;
+    Nodo* aux = new Nodo;
     aux = czo;
     
-    while (aux->get_next() != NULL) {
+    while (aux->get_next() != 0) {
         cout <<"Fila: " << aux->get_fila() << " Columna:" <<aux->get_col() <<endl;
         aux = aux->get_next();
     }
-
 }
-
-bool Lista::esta(int a, int b)
-{// busca d en la lista
-    if (this->esvacia()) return false;
-    if (this->cabeza()->get_fila() == a && this->cabeza()->get_col()) return true;
-
-    return this->resto()->esta(a,b);
-}
-/*
-void Lista::borrarD(int d, Nodo* ant)
-{
-    if (!this->esvacia()) {
-        if (d == this->cabeza()) {
-            if (ant == NULL) {//al principio
-                this->borrar();
-            }
-            else {//entre medio
-                ant->set_next(czo->get_next());
-                delete czo;
-            }
-        }
-        else  this->resto()->borrarD(d, czo);
-
-    }
-}
-*/
 
 class Pila :public Lista {
 public:
-    Pila() { Lista();};
+    Pila() { Lista(); };
     void apilar(int a, int b) { this->add(a, b); };
     Nodo* tope(void) { return this->cabeza(); };
     void desapilar(void) { this->borrar(); };
     bool pilavacia() { return this->esvacia(); };
     void imprimir(){this->impre();}
 };
-
-/*
-class Cola :public Lista {
-public:
-    Cola() { Lista(); };
-    ~Cola();
-    Nodo* tope() { return this->last(); };
-    bool colavacia(void) { return this->esvacia(); };
-    void encolar(int a, int b) { this->add(a, b); };
-    void desencolar(void) { this->borrar_last(); };
-    Nodo* ultimo(void) { return this->cabeza(); };
-    string imprimir(string s) { return this->toPrint(s); };
-};
-*/

@@ -31,7 +31,7 @@ void ColaDePilas::encolar(Pila* a){
         //if (ult == MAX - 2) ult = MAX - 1;
         ult = (ult + 1) % MAX;
         Q[ult] = a;
-        cout<<"Encole correctamente" <<endl;
+      //  cout<<"Encole correctamente" <<endl;
     }
     else cout << "Cola llena" << endl;
 }
