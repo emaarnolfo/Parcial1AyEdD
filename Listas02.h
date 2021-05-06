@@ -1,4 +1,3 @@
-
 #include <cstdlib>
 #include <iostream>
 #include <sstream>
@@ -11,14 +10,14 @@ class Nodo{
         int col;
         Nodo* next;
     public:
-        Nodo() { next = NULL; };
-        Nodo(int x, int y) { fila = x; col = y; next = NULL; };
+        Nodo() { next = 0; };
+        Nodo(int x, int y) { fila = x; col = y; next = 0; };
         void set_dato(int x, int y) { fila = x; fila = y; };
         void set_next(Nodo* n) { next = n; };
         int get_fila() { return fila; };
         int get_col() { return col; };
         Nodo* get_next() { return next; };
-        bool es_vacio() { return next == NULL; };
+        bool es_vacio() { return next == 0; };
 
 };
 
@@ -45,7 +44,7 @@ class Lista {
         void tomar(int n);                      //deja vivos los n primero nodos y borra el resto
 };
 
-void Lista::add(int a, int b) //100
+void Lista::add(int a, int b)
 {
     Nodo* nuevo = new Nodo(a, b);
     nuevo->set_next(czo);
@@ -147,10 +146,14 @@ void Lista::tomar(int n)
 
 void Lista::impre(void)
 {
-    Nodo* aux;
+    Nodo* aux = new Nodo;
     aux = czo;
     
+<<<<<<< HEAD
     while (aux->get_next() != NULL) {
+=======
+    while (aux->get_next() != 0) {
+>>>>>>> emanuel
         cout <<"Fila: " << aux->get_fila() << " Columna:" <<aux->get_col() <<endl;
         aux = aux->get_next();
     }
@@ -192,6 +195,7 @@ public:
     bool pilavacia() { return this->esvacia(); };
     void imprimir(){this->impre();}
 };
+<<<<<<< HEAD
 
 /*
 class Cola :public Lista {
@@ -206,3 +210,5 @@ public:
     string imprimir(string s) { return this->toPrint(s); };
 };
 */
+=======
+>>>>>>> emanuel
